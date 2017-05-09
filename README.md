@@ -1,3 +1,5 @@
+This package is a forked version of [https://github.com/wix/yarn-bin-fix]
+
 # yarn node_modules/.bin/ fix
 Fix for yarn's [#760](https://github.com/yarnpkg/yarn/issues/760)
 
@@ -12,9 +14,9 @@ This is not a perfect solution, but this script will allow you to migrate to yar
 ## Installation
 Install it globally (for ease of access, not necessary).
 
-`npm i -g yarn-bin-fix`
+`npm i -g yarn-bin-fixed`
 
 ## Usage
-After installing your module using `yarn`, run `yarn-bin-fix` from your **project's root**.
+After installing your module using `yarn`, run `yarn-bin-fixed` from your **project's root**.
 
 Keep in mind that if you have `postinstall` scripts that use transitive dependencies, these will fail until you run this script.
