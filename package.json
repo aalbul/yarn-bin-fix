@@ -27,7 +27,8 @@
   "dependencies": {
     "lnfs-cli": "1.0.1",
     "lodash": "4.12.0",
-    "mkdirp": "0.5.1"
+    "mkdirp": "0.5.1",
+    "recursive-search": "1.0.1"
   },
   "devDependencies": {}
 }
