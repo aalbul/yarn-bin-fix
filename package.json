@@ -25,7 +25,9 @@
     "release": "npm version patch && npm publish && git push"
   },
   "dependencies": {
-    "lodash": "^4.12.0"
+    "lnfs-cli": "1.0.1",
+    "lodash": "4.12.0",
+    "mkdirp": "0.5.1"
   },
   "devDependencies": {}
 }

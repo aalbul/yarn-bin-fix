@@ -11,7 +11,7 @@ const nodeModules = p.join(process.cwd(), 'node_modules');
 const bin = p.join(nodeModules, '.bin');
 
 function execSilently(cmd) {
-  cp.execSync(`${cmd} || true`, {stdio: ['ignore', 'ignore', 'ignore']});
+  cp.execSync(cmd, {stdio: ['ignore', 'ignore', 'ignore']});
 }
 
 function execRead(cmd) {
@@ -19,7 +19,7 @@ function execRead(cmd) {
 }
 
 function createBinFolder() {
-  execSilently(`mkdir "${bin}"`);
+  execSilently(`node ./node_modules/mkdirp/bin/cmd.js "${bin}"`);
 }
 
 function findAllPackageJsonsFiles() {
@@ -49,8 +49,8 @@ function linkExecutablesFromPackage(pkgJsonFile, pkg) {
     const src = p.join(bin, name);
     const dst = p.resolve(p.dirname(pkgJsonFile), pth);
     if (!fs.existsSync(src)) {
-      console.log(`linking ${src}`);
-      execSilently(`ln -s "${dst}" "${src}"`);
+      console.log(`linking ${src} to ${dst}`);
+      execSilently(`node ./node_modules/lnfs-cli/cli.js "${dst}" "${src}"`);
     }
   });
 }
