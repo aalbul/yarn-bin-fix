@@ -2,21 +2,18 @@
 
 console.log(`running yarn-bin-fixed...`);
 
-const cp = require('child_process');
 const p = require('path');
 const fs = require('fs');
 const _ = require('lodash');
 const search = require('recursive-search');
+const mkdirp = require('mkdirp');
+const lnfs = require('lnfs');
 
 const nodeModules = p.join(process.cwd(), 'node_modules');
 const bin = p.join(nodeModules, '.bin');
 
-function execSilently(cmd) {
-  cp.execSync(cmd, {stdio: ['ignore', 'ignore', 'ignore']});
-}
-
 function createBinFolder() {
-  execSilently(`node "${p.join(nodeModules, 'mkdirp', 'bin', 'cmd.js')}" "${bin}"`);
+  mkdirp.sync(bin);
 }
 
 function findAllPackageJsonsFiles() {
@@ -45,8 +42,8 @@ function linkExecutablesFromPackage(pkgJsonFile, pkg) {
     const src = p.join(bin, name);
     const dst = p.resolve(p.dirname(pkgJsonFile), pth);
     if (!fs.existsSync(src)) {
-      console.log(`linking ${src} to ${dst}`);
-      execSilently(`node "${p.join(nodeModules, 'lnfs-cli', 'cli.js')}" "${dst}" "${src}"`);
+      console.log(`linking ${src} -> ${dst}`);
+      lnfs(dst, src);
     }
   });
 }
