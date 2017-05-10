@@ -16,7 +16,7 @@ function execSilently(cmd) {
 }
 
 function createBinFolder() {
-  execSilently(`node ./node_modules/mkdirp/bin/cmd.js "${bin}"`);
+  execSilently(`node "${p.join(nodeModules, 'mkdirp', 'bin', 'cmd.js')}" "${bin}"`);
 }
 
 function findAllPackageJsonsFiles() {
@@ -46,7 +46,7 @@ function linkExecutablesFromPackage(pkgJsonFile, pkg) {
     const dst = p.resolve(p.dirname(pkgJsonFile), pth);
     if (!fs.existsSync(src)) {
       console.log(`linking ${src} to ${dst}`);
-      execSilently(`node ./node_modules/lnfs-cli/cli.js "${dst}" "${src}"`);
+      execSilently(`node "${p.join(nodeModules, 'lnfs-cli', 'cli.js')}" "${dst}" "${src}"`);
     }
   });
 }
